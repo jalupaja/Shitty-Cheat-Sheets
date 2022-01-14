@@ -49,7 +49,7 @@
 ```git log``` | show history of last commits
 ```git log --follow <file>``` | show history of a file
 ```git diff <commit hash/branch 1>...<commit hash 2> [<filepath>]``` | show changes between commits or branches
-```git blame <file>``` | show author, time, change made of file
+```git blame <file>``` | show author, time and changes made to file
 
 ## Stash
 | Commands | Expanation |
