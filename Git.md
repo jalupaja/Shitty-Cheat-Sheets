@@ -1,7 +1,7 @@
 # Git Cheat Sheet
 >[Git](https://git-scm.com) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. 
 
-| Table of contents |
+| **Table of Contents** |
 | -- |
 [Default](#defaults)
 [Commits](#commits)
@@ -9,7 +9,7 @@
 [Logs](#logs)
 [Other Resources](#other-resources)
 
-## Defaults
+## defaults
 | Commands | Explanation |
 | -- | -- |
 ```git [<option>] --help``` | get help on a specific topic
@@ -24,7 +24,7 @@
 |
 | ".gitignore" file | using this file in your root git directory you can excludes files, filetypes and folders. You can find templates [here](https://github.com/github/gitignore)
 
-## Commits
+## commits
 | Commands | Explanation |
 | -- | -- |
 ```git commit --fixup <commit hash>``` | mark as fix for specified commit
@@ -32,7 +32,7 @@
 ```git reset <commit hash> [--hard]``` | delete all commits after specified commit
 ```git update-ref -d HEAD``` | reset first commit
 
-## Branches
+## branches
 | Commands | Explanation |
 | -- | -- |
 ```git branch``` | list all available branches
@@ -43,7 +43,7 @@
 ```git branch -d <branch name>``` | delete a branch
 ```git merge <branch name>``` | merge named branch in current branch
 
-## Logs
+## logs
 | Commands | Explanation |
 | -- | -- |
 ```git log``` | show history of last commits
@@ -51,7 +51,7 @@
 ```git diff <commit hash/branch 1>...<commit hash 2> [<filepath>]``` | show changes between commits or branches
 ```git blame <file>``` | show author, time and changes made to file
 
-## Stash
+## stash
 | Commands | Expanation |
 | -- | -- |
 ```git stash -a``` | stash current state of all files
@@ -59,7 +59,7 @@
 ```git stash pop``` | Apply last stashed state
 ```git stash clear``` | delete all stashes
 
-## Other Resources
+## other resources
 
 | Source | About |
 | -- | -- |
