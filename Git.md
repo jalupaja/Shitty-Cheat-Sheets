@@ -1,5 +1,5 @@
 # Git Cheat Sheet
->[Git](https://git-scm.com) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. 
+>[Git](https://git-scm.com) is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 
 | **Table of Contents** |
 | -- |
@@ -52,7 +52,7 @@
 ```git blame <file>``` | show author, time and changes made to file
 
 ## stash
-| Commands | Expanation |
+| Commands | Explanation |
 | -- | -- |
 ```git stash -a``` | stash current state of all files
 ```git stash list``` | list stashes
@@ -60,7 +60,6 @@
 ```git stash clear``` | delete all stashes
 
 ## other resources
-
 | Source | About |
 | -- | -- |
 [git](https://git-scm.com/docs) | official git man pages
