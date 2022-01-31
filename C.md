@@ -47,7 +47,7 @@ long long integer | ```long long``` \| ```long long int``` | ```%lld``` \| ```%l
 float | ```float``` | ```%f```
 double | ```double``` | ```%lf```
 long double | ```long double``` | ```%Lf```
-character | ```char``` | ```%c```
+character | ```char``` | ```%c``` |
 |
 string | ```char[]``` | ```%s```
 pointer | ```void *``` | ```%p```
