@@ -41,7 +41,7 @@
 | -- | -- | -- |
 short integer | ```short``` \| ```short int``` | ```%d``` \| ```%i```
 integer | ```signed int``` \| ```int``` | ```%d``` \| ```%i```
-unsigned integer (> 0) | ```unsigned``` \| ```unsigned int``` | ```%u```
+unsigned integer (>= 0) | ```unsigned``` \| ```unsigned int``` | ```%u```
 long integer | ```long``` \| ```long int``` | ```%ld``` \| ```%li```
 long long integer | ```long long``` \| ```long long int``` | ```%lld``` \| ```%lli```
 float | ```float``` | ```%f```
