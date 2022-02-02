@@ -133,6 +133,8 @@ switch(int/char-Variable) {
 | | ```printf()``` | output to console
 | | ```scanf()``` | user input from console
 | | ```fgets()``` | user input from console
+| | ```fopen(file, mode)``` | open file in specified mode
+| | ```fclose(file)``` | close previously opened file
 ```stdlib.h```
 | | ```wchar_t``` | 16bit unicode character
 | | ```EXIT_SUCCESS``` | "successful" return value
@@ -160,6 +162,11 @@ switch(int/char-Variable) {
 | | ```strncmp(char *A, char *B, int length)``` | compare strings
 | | ```strcspn(char *A, char *B)``` | returns index of first occurrence of any char B in A
 | | ```strstr(char *A, char *B)``` | returns pointer to first occurrence of string B in A
+```ctype.h```
+| | ```isdigit(char)``` | returns 0 if not a digit, else returns 1
+| | ```islower(char)``` | returns 0 if not lowercase, else returns 1
+| | ```isupper(char)``` | returns 0 if not uppercase, else returns 1
+| | ```tolower(char)``` | returns lowercase character
 ```stdbool.h```
 | | ```bool``` | boolean can be true=1 or false=0
 
