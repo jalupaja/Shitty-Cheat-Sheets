@@ -59,7 +59,7 @@ pointer | ```void *``` | ```%p```
 ```auto``` | will be automatically deletet at the end of the scope(default)
 ```extern``` | used if variable is in another file
 ```register``` | tells the compiler to save variable in cpu-register which is faster then RAM (compiler will still decide)
-```volatile``` | always read variable from memory (mostly used for driver software) -> will re-read so that there is not error
+```volatile``` | always read variable from memory (mostly used for driver software)
 ```const``` | defines a constant variable that connot be changed
 
 ## functions
@@ -125,7 +125,7 @@ switch(int/char-Variable) {
 
 ## includes
 - include header from compiler folder: ```#include <filename.h>```
-- include header from current directory: ```#include "filename.h>```
+- include header from current directory: ```#include "filename.h"```
 
 | ```#include <...>``` | Useful example | Usage |
 | -- | -- | -- |
