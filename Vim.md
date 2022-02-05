@@ -8,6 +8,7 @@
 [insert mode](#insert-mode)
 [visual mode](#visual-mode)
 [normal mode](#normal-mode)
+[move screen](#move-screen)
 [using multple files](#using-multiple-files)
 [tabs](#tabs)
 [split windows](#split-windows)
@@ -33,6 +34,9 @@
 ```k``` | move a line down
 ```h``` | move left
 ```l``` | move right
+```w``` | move to the beginning of the next word
+```e``` | move to the end of the next word
+```b``` | move to the beginning of the previous word
 ```0``` | move to the end of the line
 ```$``` | move to the beginning of the line
 ```gj``` | move a visual line up (for wordwrap)
@@ -44,6 +48,13 @@
 ```3k``` \| ```3-``` | move 3 lines down from current position
 ```}``` | move to next block
 ```{``` | move to previous block
+```<C-u>``` | move 1/2 screen up
+```<C-d>``` | move 1/2 screen down
+```<C-b>``` | move 1 full screen up
+```<C-f>``` | move 1 full screen down
+```zz``` | center cursor on screen
+```gd``` | move to local declaration
+```gD``` | move to global declaration
 
 ## insert mode
 | Commands | Explanation |
@@ -100,6 +111,13 @@
 ```:s/abc/def/``` | replace all instances of abc with def in the current line or selected lines (uses RegEx)
 ```:%s/abc/def/g``` | replace all instances of abc with def in the current file
 ```:noh``` | remove highlighting of search results
+
+## move screen
+| Commands | Explanation |
+" -- " -- "
+```zz``` | center cursor on screen
+```<C-y>``` | move screen up one line
+```<C-e>``` | move screen down one line
 
 ## using multiple files
 | Commands | Explanation |
