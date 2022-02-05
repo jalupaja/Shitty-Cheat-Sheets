@@ -2,7 +2,17 @@
 >[Vim](https://www.vim.org) Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient.
 | **Table of Contents** |
 | -- |
-
+[defaults](#defaults)
+[how to move](#move-in-normal-and-visual-mode)
+[insert mode](#insert-mode)
+[visual mode](#visual-mode)
+[normal mode](#normal-mode)
+[using multple files](#using-multiple-files)
+[tabs](#tabs)
+[split windows](#split-windows)
+[macros](#macros)
+[other stuff](#other-stuff)
+[other resources](#other-resources)
 
 ## defaults
 | Commands | Explanation |
@@ -16,6 +26,8 @@
 ```ESC``` | exit any mode
 
 ## move in NORMAL and VISUAL mode
+| Commands | Explanation |
+| -- | -- |
 ```j``` | move a line up
 ```k``` | move a line down
 ```h``` | move left
@@ -33,6 +45,8 @@
 ```{``` | move to previous block
 
 ## insert mode
+| Commands | Explanation |
+| -- | -- |
 ```i``` | get into INSERT mode in front of of the cursor
 ```I``` | get into INSERT mode in front of of the current line
 ```a``` | get into INSERT mode at the end of the cursor
@@ -42,6 +56,8 @@
 ```c``` | replace the selected content and get into INSERT mode
 
 ## visual mode
+| Commands | Explanation |
+| -- | -- |
 ```v``` | get into VISUAL mode
 ```V``` | get into VISUAL line mode
 ```<C-v>``` | get into VISUAL block mode
@@ -57,6 +73,8 @@
 ```A``` | insert at the end of all selected lines (only in block mode)
 
 ## normal mode
+| Commands | Explanation |
+| -- | -- |
 ```p``` | paste previously yanked content
 ```P``` | paste previously yanked content in front of the cursor
 ```]p``` | paste previously yanked content and adjust to current indention
@@ -70,6 +88,8 @@
 ```<<``` | de-indent current line
         
 ## search
+| Commands | Explanation |
+| -- | -- |
 ```n``` | go to next search result
 ```N``` | go to previous search result
 ```/``` | search for following text, press ESC to to jump to previous position or enter to finish search
@@ -81,6 +101,8 @@
 ```:noh``` | remove highlighting of search results
 
 ## using multiple files
+| Commands | Explanation |
+| -- | -- |
 ```:e``` | open/create a new a file
 ```:bad``` | add file to buffer without loading it
 ```:ls``` | list current buffers
@@ -91,12 +113,16 @@
 ```:3bd``` | close buffer 3
 
 ## tabs
+| Commands | Explanation |
+| -- | -- |
 ```:tabnew``` | create new tab/ open file in new tab
 ```gt``` | move to next tab
 ```gT``` | move to previous tab
 ```3gt``` | move to 3rd tab
 
 ## split windows
+| Commands | Explanation |
+| -- | -- |
 ```<C-ws>``` \| ```:sp``` | split window horizontally
 `a``<C-wv>``` \| ```:vs``` | split window vertically
 ```<C-ww>``` | switch windows
@@ -107,11 +133,15 @@
 ```<C-wx>``` | change current window with another one
 
 ## macros
+| Commands | Explanation |
+| -- | -- |
 ```qa``` | start recording macro a
 ```q``` | stop recording
 ```@a``` | run macro a
 
 ## other stuff
+| Commands | Explanation |
+| -- | -- |
 ```:ter``` | start a terminal session
 
 ## other resources
