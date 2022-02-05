@@ -1,5 +1,6 @@
 # Vim Cheat Sheet
 >[Vim](https://www.vim.org) Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient.
+
 | **Table of Contents** |
 | -- |
 [defaults](#defaults)
