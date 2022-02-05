@@ -1,5 +1,5 @@
 # Vim Cheat Sheet
->[Vim](https://www.vim.org) Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient.
+>[Vim](https://www.vim.org) is a highly configurable text editor built to make creating and changing any kind of text very efficient.
 
 | **Table of Contents** |
 | -- |
@@ -125,7 +125,7 @@
 | Commands | Explanation |
 | -- | -- |
 ```<C-ws>``` \| ```:sp``` | split window horizontally
-`a``<C-wv>``` \| ```:vs``` | split window vertically
+```<C-wv>``` \| ```:vs``` | split window vertically
 ```<C-ww>``` | switch windows
 ```<C-wj>``` | switch to the window below
 ```<C-wk>``` | switch to the window above
