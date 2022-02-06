@@ -168,3 +168,4 @@
 | -- | -- |
 vimtutor | vim learning utility shipped with vim
 [rtoor](https://vim.rtorr.com) | Vim Cheat Sheet
+[redditor](https://old.reddit.com/r/vim/comments/a1z6lb/vim_wallpaper_to_quickly_peek_at_with_show) | Vim Cheat Sheet wallpaper
