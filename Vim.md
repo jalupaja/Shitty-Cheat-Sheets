@@ -122,7 +122,7 @@
 ## move screen
 
 | Commands | Explanation |
-" -- " -- "
+| -- | -- |
 `zz` | center cursor on screen
 `<C-y>` | move screen up one line
 `<C-e>` | move screen down one line

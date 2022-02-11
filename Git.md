@@ -23,7 +23,7 @@
 `git remote add <name> <remote address>` | add remote repository
 `git push [<remote name>]` | push git to remote repository
 `git status` | show git status of current directory
-|
+| |
 | ".gitignore" file | using this file in your root git directory you can excludes files, filetypes and folders. You can find templates [here](https://github.com/github/gitignore)
 
 ## commits
