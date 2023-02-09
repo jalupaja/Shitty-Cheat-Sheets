@@ -1,6 +1,12 @@
 #+title: Haskell
 
 #+OPTIONS: toc:2
+* TOC
+[[#Datatypes]]
+[[#Types]]
+[[#Pattern Matching]]
+[[#where bindings]]
+
 
 * Datatypes
 | Datatype | info               |
