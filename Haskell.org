@@ -1,0 +1,54 @@
+#+title: Haskell
+
+#+OPTIONS: toc:nil
+
+* Datatypes
+* Classes
+| Class | Explanation |
+|-------+-------------|
+| Ord   | Order-able  |
+* Pattern Matching
+* where bindings
+`where` clause can be used to define local variables or functions at the end of a function.
+Variables defined in the `where` clause are visible inside the function as well as across guards.
+two different ways of writing where clauses:
+#+begin_src Haskell
+    where x = 1
+        y = 2
+        x = 3
+#+end_src
+#+begin_src Haskell
+    where (x, y, z) = (1, 2, 3)
+#+end_src
+* let bindings
+`let` lets you bind local variables or functions to be used after `in`.
+If there is no `in` part, it will be visible in the current scope.
+#+begin_src Haskell
+let x = 1
+    y = 2
+in x + y
+#+end_src
+#+begin_src Haskell
+[let square x = x*x in (square 1, square 2, square 3)]
+#+end_src
+* Guards
+like if else case
+#+begin_src Haskell
+nums :: (Num a) => a -> a -> a
+nums x y
+    | z < 1 = 0
+    | z < 3 = ret_one
+    | otherwise = 2
+    where z = x+y
+        ret_one = 1
+#+end_src
+if `otherwise` is missing, the function will fall through (if there are any more)
+* Case expressions
+like switch case with pattern matching
+#+begin_src Haskell
+head' :: [a] -> a
+head' xs = case xs of [] -> error "is empty"
+            (x:_) -> x
+#+end_src
+* Resources
+http://learnyouahaskell.com
