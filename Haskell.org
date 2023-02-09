@@ -1,12 +1,31 @@
 #+title: Haskell
 
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:2
 
 * Datatypes
-* Classes
-| Class | Explanation |
-|-------+-------------|
-| Ord   | Order-able  |
+| Datatype | info               |
+|----------+--------------------|
+| Int      | Number             |
+| Integer  | Int with no bounds |
+| Float    | Floating Point     |
+| Double   | Bigger Float       |
+| Bool     | True or False      |
+| Char     | Character          |
+
+* Types
+| Type     | Explanation             |
+|----------+-------------------------|
+| Ord      | Order-able              |
+| Eq       | Equality testable       |
+| Num      | any Number              |
+| Integral | only whole numbers      |
+| Floating | Flaot, Double           |
+| Ordering | GT, LT, EQ              |
+| Show     | String-able             |
+| Read     | Can be read from String |
+| Enum     | enumerate-able          |
+| Bounded  | Have lower, upper bound |
+
 * Pattern Matching
 * where bindings
 `where` clause can be used to define local variables or functions at the end of a function.
