@@ -1,12 +1,13 @@
 #+title: Haskell
 
-#+OPTIONS: toc:2
-* TOC
-[[#Datatypes]]
-[[#Types]]
-[[#Pattern Matching]]
-[[#where bindings]]
-
+| [[#Datatypes]]        |
+| [[#Types]]            |
+| [[#Pattern Matching]] |
+| [[#where_bindings]]   |
+| [[#let_bindings]]     |
+| [[#Guards]]           |
+| [[#Case_expressions]] |
+| [[#Resources]]        |
 
 * Datatypes
 | Datatype | info               |
@@ -33,7 +34,11 @@
 | Bounded  | Have lower, upper bound |
 
 * Pattern Matching
-* where bindings
+#+begin_src Haskell
+scnd :: (a, b, c) -> a
+scnd (_, x, _) = x
+#+end_src
+* where_bindings
 `where` clause can be used to define local variables or functions at the end of a function.
 Variables defined in the `where` clause are visible inside the function as well as across guards.
 two different ways of writing where clauses:
@@ -45,7 +50,7 @@ two different ways of writing where clauses:
 #+begin_src Haskell
     where (x, y, z) = (1, 2, 3)
 #+end_src
-* let bindings
+* let_bindings
 `let` lets you bind local variables or functions to be used after `in`.
 If there is no `in` part, it will be visible in the current scope.
 #+begin_src Haskell
@@ -68,7 +73,7 @@ nums x y
         ret_one = 1
 #+end_src
 if `otherwise` is missing, the function will fall through (if there are any more)
-* Case expressions
+* Case_expressions
 like switch case with pattern matching
 #+begin_src Haskell
 head' :: [a] -> a
