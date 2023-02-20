@@ -1,13 +1,17 @@
 #+title: Haskell
 
-| [[#Datatypes]]        |
-| [[#Types]]            |
-| [[#Pattern Matching]] |
-| [[#where_bindings]]   |
-| [[#let_bindings]]     |
-| [[#Guards]]           |
-| [[#Case_expressions]] |
-| [[#Resources]]        |
+| [[#Datatypes]]                  |
+| [[#Types]]                      |
+| [[#Pattern Matching]]           |
+| [[#where bindings]]             |
+| [[#let bindings]]               |
+| [[#Guards]]                     |
+| [[#Case expressions]]           |
+| [[#currying]]                   |
+| [[#lambda]]                     |
+| [[#Function application]]       |
+| [[#Standard library functions]] |
+| [[#Resources]]                  |
 
 * Datatypes
 | Datatype | info               |
@@ -38,7 +42,7 @@
 scnd :: (a, b, c) -> a
 scnd (_, x, _) = x
 #+end_src
-* where_bindings
+* where bindings
 `where` clause can be used to define local variables or functions at the end of a function.
 Variables defined in the `where` clause are visible inside the function as well as across guards.
 two different ways of writing where clauses:
@@ -50,7 +54,7 @@ two different ways of writing where clauses:
 #+begin_src Haskell
     where (x, y, z) = (1, 2, 3)
 #+end_src
-* let_bindings
+* let bindings
 `let` lets you bind local variables or functions to be used after `in`.
 If there is no `in` part, it will be visible in the current scope.
 #+begin_src Haskell
@@ -73,12 +77,56 @@ nums x y
         ret_one = 1
 #+end_src
 if `otherwise` is missing, the function will fall through (if there are any more)
-* Case_expressions
+* Case expressions
 like switch case with pattern matching
 #+begin_src Haskell
 head' :: [a] -> a
 head' xs = case xs of [] -> error "is empty"
             (x:_) -> x
 #+end_src
+* currying
+writing functions that await another parameter with the parameter behind it
+#+begin_src Haskell
+3 + 4
+(+ 4) 3
+#+end_src
+
+#+begin_src Haskell
+sum [1,2,3,4]
+foldl (+) 0 [1,2,3,4]
+#+end_src
+* lambda
+inline function
+#+begin_src Haskell
+func2 = map addNums [(1,2), (3,4), (5,6)]
+    where addNums (a, b) = a + b
+func1 = map (\(a,b) -> a + b) [(1,2), (3,4), (5,6)]
+#+end_src
+* Function application
+$ ... as a shorter way of writing (...)
+#+begin_src Haskell
+sqrt (3 + 4 + 9)
+sqrt $ 3 + 4 + 9
+
+f (g (z x))
+f $ g $ z x
+
+map ($ 3) [(4+), (10*), (^2), sqrt]
+#+end_src
+* Standard library functions
+| function                  | explanation                                                                     |
+|---------------------------+---------------------------------------------------------------------------------|
+| elem x xs                 | return wether x is an element in xs                                             |
+| head xs                   | give first element of list xs                                                   |
+| length xs                 | get length of a list                                                            |
+| takeWhile f xs            | take elements xs into new list as long as f is true (takeWhile (<1000) [1..])   |
+| sum xs                    | get sum of list xs                                                              |
+| map f xs                  | map function f to every element in list xs                                      |
+| flip x y                  | flip input values to y x                                                        |
+| foldl f 0 xs              | apply function f over list (from the left) xs with the starting value 0         |
+| foldl1 f xs               | apply function f over list (from the left) xs with the starting value of x:xs   |
+| foldr f 0 xs              | apply function f over list (from the right) xs with the starting value 0        |
+| foldr1 f xs               | apply function f over list (from the right) xs with the starting value of xs:x  |
+| scanl,scanl1,scanr,scanr1 | like foldl,foldl1,foldr,foldr1  but will give a list of all intermediate values |
 * Resources
 http://learnyouahaskell.com
