@@ -113,6 +113,15 @@ f $ g $ z x
 
 map ($ 3) [(4+), (10*), (^2), sqrt]
 #+end_src
+* Funciton composition
+#+begin_src Haskell
+(.) :: (b -> c) -> (a -> b) -> a -> c
+f . g = \x -> f (g x)
+#+end_src
+#+begin_src Haskell
+map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
+map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
+#+end_src
 * Standard library functions
 | function                  | explanation                                                                     |
 |---------------------------+---------------------------------------------------------------------------------|
