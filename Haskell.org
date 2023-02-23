@@ -1,17 +1,18 @@
 #+title: Haskell
 
-| [[#Datatypes]]                  |
-| [[#Types]]                      |
-| [[#Pattern Matching]]           |
-| [[#where bindings]]             |
-| [[#let bindings]]               |
-| [[#Guards]]                     |
-| [[#Case expressions]]           |
-| [[#currying]]                   |
-| [[#lambda]]                     |
-| [[#Function application]]       |
-| [[#Standard library functions]] |
-| [[#Resources]]                  |
+| [[#Datatypes]]                |
+| [[#Modules]]                  |
+| [[#Types]]                    |
+| [[#Pattern Matching]]         |
+| [[#where bindings]]           |
+| [[#let bindings]]             |
+| [[#Guards]]                   |
+| [[#Case expressions]]         |
+| [[#currying]]                 |
+| [[#lambda]]                   |
+| [[#Function application]]     |
+| [[#Standard library modules]] |
+| [[#Resources]]                |
 
 * Datatypes
 | Datatype | info               |
@@ -37,6 +38,34 @@
 | Enum     | enumerate-able          |
 | Bounded  | Have lower, upper bound |
 
+* Modules
+** import modules
+#+begin_src Haskell
+import module_name
+import qualified mod1 as m1 -- when function names already exist in other modules use qualified, then rename mod1.func to m1.func
+import mod1 (func1, func2) -- only import some functions
+import mod1 hiding (func3) -- import everything except func3
+
+import Folder_name.Own_module_name
+#+end_src
+** create modules
+#+begin_src Haskell
+module Module_name
+(exported_func1,
+ exported_func2
+) where
+
+exported_func1 :: Num -> Num
+...
+exported_func2 ...
+...
+not_exported_func0 ...
+...
+#+end_src
+
+#+begin_src Haskell
+module Folder_name.Own_module_name
+#+end_src
 * Pattern Matching
 #+begin_src Haskell
 scnd :: (a, b, c) -> a
@@ -113,20 +142,85 @@ f $ g $ z x
 
 map ($ 3) [(4+), (10*), (^2), sqrt]
 #+end_src
-* Standard library functions
-| function                  | explanation                                                                     |
-|---------------------------+---------------------------------------------------------------------------------|
-| elem x xs                 | return wether x is an element in xs                                             |
-| head xs                   | give first element of list xs                                                   |
-| length xs                 | get length of a list                                                            |
-| takeWhile f xs            | take elements xs into new list as long as f is true (takeWhile (<1000) [1..])   |
-| sum xs                    | get sum of list xs                                                              |
-| map f xs                  | map function f to every element in list xs                                      |
-| flip x y                  | flip input values to y x                                                        |
-| foldl f 0 xs              | apply function f over list (from the left) xs with the starting value 0         |
-| foldl1 f xs               | apply function f over list (from the left) xs with the starting value of x:xs   |
-| foldr f 0 xs              | apply function f over list (from the right) xs with the starting value 0        |
-| foldr1 f xs               | apply function f over list (from the right) xs with the starting value of xs:x  |
-| scanl,scanl1,scanr,scanr1 | like foldl,foldl1,foldr,foldr1  but will give a list of all intermediate values |
+* Standard library modules
+| module    | function                  | explanation                                                                        |
+|-----------+---------------------------+------------------------------------------------------------------------------------|
+| Data.List |                           |                                                                                    |
+|           | head xs                   | give first element of list xs                                                      |
+|           | length xs                 | get length of a list                                                               |
+|           | takeWhile f xs            | take elements of xs into a new list as long as f is true (takeWhile (<1000) [1..]) |
+|           | dropWhile f xs            | take elements of xs into a new list starting when f is true                        |
+|           | span f xs                 | returns pair of lists that would have been returned b takeWhile, dropWhile         |
+|           | break f xs                | same as span (not . f) xs                                                          |
+|           | sum xs                    | get sum of list xs                                                                 |
+|           | map f xs                  | map function f to every element in list xs                                         |
+|           | flip x y                  | flip input values to y x                                                           |
+|           | foldl f 0 xs              | apply function f over list (from the left) xs with the starting value 0            |
+|           | foldl1 f xs               | apply function f over list (from the left) xs with the starting value of x:xs      |
+|           | foldr f 0 xs              | apply function f over list (from the right) xs with the starting value 0           |
+|           | foldr1 f xs               | apply function f over list (from the right) xs with the starting value of xs:x     |
+|           | scanl,scanl1,scanr,scanr1 | like foldl,foldl1,foldr,foldr1  but will give a list of all intermediate values    |
+|           | intersperse '.' xs        | put a '.' in between every element of the list xs                                  |
+|           | concat xs                 | flatten list of lists                                                              |
+|           | intercalate xs ts         | put list xs in between all lists of ts and flatten the result                      |
+|           | transpose xs              | switch columns and rows of the 2D matrix xs                                        |
+|           | and                       | = &&                                                                               |
+|           | or                        |                                                                                    |
+|           | union                     |                                                                                    |
+|           | intersect                 |                                                                                    |
+|           | any f xs                  | return True if any element of xs satifies f                                        |
+|           | all f xs                  | return True if all alements of xs satify f                                         |
+|           | iterate f x               | return infinite list [f(x), f(f(x)), ...]                                          |
+|           | splitAt x xs              | split list xs into tuple at index x                                                |
+|           | sort xs                   | sort list xs                                                                       |
+|           | group xs                  | group following, equal list items                                                  |
+|           | isInfixOf xs ts           | return if xs is in ts                                                              |
+|           | isPrefixOf xs ts          | return if xs is in the beginning of ts                                             |
+|           | isSuffixOf xs ts          | return if xs is at the end of ts                                                   |
+|           | partition f xs            | return pair of lists that match f, don't match f                                   |
+|           | find f xs                 | returns the first element of xs that satisfies f                                   |
+|           | findIndex f xs            | returns the index of the first element of xs that satisfies f                      |
+|           | findIndeces f xs          | returns a list of indeces of xs that satisfy f                                     |
+|           | elem x xs                 | returns wether x is an element in xs                                               |
+|           | elemIndex x xs            | returns the index of x, if x is an element in xs                                   |
+|           | elemIndeces x xs          | returns a list of indeces of all elements x in xs                                  |
+|           | zip xs                    | zip together two lists in a touple (also zip3, zip4, ... zip7)                     |
+|           | zipWith f xs              | zip together two lists using f also (zipWith3, ... zipWith7)                       |
+|           | lines xs                  | return list of all xs seperated by lines                                           |
+|           | unlines xs                | reverse lines                                                                      |
+|           | words xs                  | same as lines but split at ' '                                                     |
+|           | unwords xs                | reverse words                                                                      |
+|           | nub xs                    | remove duplicates from xs                                                          |
+|           | delete x xs               | delete the first case of x in xs                                                   |
+|           | xs \\ ts                  | calls delete for every in element in ts on xs                                      |
+|           | insert x xs               | insert x in xs at the left of the first bigger element (from left)                 |
+|           | xs !! i                   | get the element at index i of the list xs                                          |
+|           | genericIndex              | more generic !!                                                                    |
+|           | genericLength xs          | returns Num instead of Int (length xs)                                             |
+|           | nubBy f xs                | same as nub but usees f for comparison                                             |
+|           | on f g                    | = \x y -> f(g x) (g y)                                                             |
+| Data.Char |                           |                                                                                    |
+|           | isControl x               | x is a control character                                                           |
+|           | isSpace, ...              | x is a ... character                                                               |
+|           | generalCategory x         | get the general Category of char x                                                 |
+|           | toLower x                 | convert character x to lower case                                                  |
+|           | digitToInt x              | turn character x into an Integer (0-F)                                             |
+| Data.Map  |                           |                                                                                    |
+|           | fromList [(x, y), ...]    | returns Map Object from input                                                      |
+|           | singleton x y             | fromList [(x, y)]                                                                  |
+|           | insert x y m              | insert (x, y) into Map m                                                           |
+|           | null m                    | check if m is empty                                                                |
+|           | size m                    | get m size                                                                         |
+|           | member x m                | check if x is a member of m                                                        |
+|           | map, filter               | like normal map and filter                                                         |
+|           | fromListWith f xs         | like fromList but function f decides what to do with duplicate keys                |
+|           | lookup x m                | lookup value of key x in Map m                                                     |
+| Data.Set  |                           | no duplicates                                                                      |
+|           | fromList xs               | like Data.Map.fromList                                                             |
+|           | intersection s1 s2        |                                                                                    |
+|           | difference s1 s2          |                                                                                    |
+|           | union s1 s2               |                                                                                    |
+|           | ...                       | many of the same functions as in Data.Map                                          |
 * Resources
+https://hoogle.haskell.org/
 http://learnyouahaskell.com
