@@ -11,6 +11,7 @@
 | [[#currying]]                 |
 | [[#lambda]]                   |
 | [[#Function application]]     |
+| [[#Function composition]]     |
 | [[#own datatypes]]            |
 | [[#I/O]]                      |
 | [[#Random]]                   |
@@ -146,6 +147,15 @@ f (g (z x))
 f $ g $ z x
 
 map ($ 3) [(4+), (10*), (^2), sqrt]
+#+end_src
+* Funciton composition
+#+begin_src Haskell
+(.) :: (b -> c) -> (a -> b) -> a -> c
+f . g = \x -> f (g x)
+#+end_src
+#+begin_src Haskell
+map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
+map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
 #+end_src
 * own datatypes
 create a new datatype called Shape that can be either a Circle or a Rectangle consisting of 3/4 Flaot types
