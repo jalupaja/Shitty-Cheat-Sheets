@@ -3,20 +3,20 @@
 | [[#Datatypes]]                |
 | [[#Modules]]                  |
 | [[#Types]]                    |
-| [[#Pattern Matching]]         |
-| [[#where bindings]]           |
-| [[#let bindings]]             |
+| [[#Pattern-Matching]]         |
+| [[#where-bindings]]           |
+| [[#let-bindings]]             |
 | [[#Guards]]                   |
-| [[#Case expressions]]         |
+| [[#Case-expressions]]         |
 | [[#currying]]                 |
 | [[#lambda]]                   |
-| [[#Function application]]     |
-| [[#Function composition]]     |
-| [[#own datatypes]]            |
+| [[#Function-application]]     |
+| [[#Function-composition]]     |
+| [[#own-datatypes]]            |
 | [[#I/O]]                      |
 | [[#Random]]                   |
 | [[#Exceptions]]               |
-| [[#Standard library modules]] |
+| [[#Standard-library-modules]] |
 | [[#Resources]]                |
 
 * Datatypes
