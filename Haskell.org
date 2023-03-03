@@ -158,19 +158,6 @@ map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
 map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
 #+end_src
 * own datatypes
-create a new datatype called Shape that can be either a Circle or a Rectangle consisting of 3/4 Flaot types
-#+begin_src Haskell
-data Shape = Circle Float Float Float | Rectangle Float Float Float Float
-data Shape2 = Shape2 Float deriving (Show) -- make type printable
-data Shape3 a = Shape3 a a -- parameterized type
-data Shape4 = Shape4 { x :: Float, y :: Float } -- will create functions x and y that return a Float
-#+end_src
-** export datatype
-#+begin_src Haskell
-module Module_name
-( Shape(...) -- ... exports all value constructors
-) where
-#+end_src
 ** type aliases/synonyms
 #+begin_src Haskell
 type Name = String
@@ -178,6 +165,25 @@ type Number = String
 type PhoneBook = [(Name, Number)]
 
 type paramType x y = [(x, y)]
+#+end_src
+** using data keyword
+create a new datatype called Shape that can be either a Circle or a Rectangle consisting of 3/4 Flaot types
+#+begin_src Haskell
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+data Shape2 = Shape2 Float deriving (Show) -- make type printable
+data Shape3 a = Shape3 a a -- parameterized type
+data Shape4 = Shape4 { x :: Float, y :: Float } -- will create functions x and y that return a Float
+#+end_src
+** using newtype keyword
+newtype is faster then data but can only have one value constructor with one field
+#+begin_src Haskell
+newtype CharList = CharList { getCharList :: [Char] } deriving (Eq, Show)
+#+end_src
+** export datatype
+#+begin_src Haskell
+module Module_name
+( Shape(...) -- ... exports all value constructors
+) where
 #+end_src
 ** define typeclasses
 #+begin_src Haskell
@@ -236,137 +242,153 @@ handler e
     | otherwise = ioError e -- throw Exception if catched wrong one
 #+end_src
 * Standard library modules
-| module               | function                   | explanation                                                                            |
-|----------------------+----------------------------+----------------------------------------------------------------------------------------|
-|                      | putStrLn                   | takes String and a new line and returns an IO action                                   |
-|                      | putStr                     | takes String (without a new line) an IO action                                         |
-|                      | putChar                    |                                                                                        |
-|                      | print                      | call putStrLn with the stringified variable                                            |
-|                      | getLine                    | returns IO action from IO                                                              |
-|                      | getChar                    |                                                                                        |
-|                      | sequence xs                | calls all functions in list xs                                                         |
-|                      | mapM f xs                  | map function f to every element in list xs and returns IO action                       |
-|                      | mapM_ f xs                 | same as mapM but throws away the result                                                |
-|                      | getContents                | read from stdin until EOF                                                              |
-|                      | interact f                 | stdin into f into stdout                                                               |
-| Data.List            |                            |                                                                                        |
-|                      | head xs                    | give first element of list xs                                                          |
-|                      | length xs                  | get length of a list                                                                   |
-|                      | takeWhile f xs             | take elements of xs into a new list as long as f is true (takeWhile (<1000) [1..])     |
-|                      | dropWhile f xs             | take elements of xs into a new list starting when f is true                            |
-|                      | span f xs                  | returns pair of lists that would have been returned b takeWhile, dropWhile             |
-|                      | break f xs                 | same as span (not . f) xs                                                              |
-|                      | sum xs                     | get sum of list xs                                                                     |
-|                      | map f xs                   | map function f to every element in list xs                                             |
-|                      | flip x y                   | flip input values to y x                                                               |
-|                      | foldl f 0 xs               | apply function f over list (from the left) xs with the starting value 0                |
-|                      | foldl1 f xs                | apply function f over list (from the left) xs with the starting value of x:xs          |
-|                      | foldr f 0 xs               | apply function f over list (from the right) xs with the starting value 0               |
-|                      | foldr1 f xs                | apply function f over list (from the right) xs with the starting value of xs:x         |
-|                      | scanl,scanl1,scanr,scanr1  | like foldl,foldl1,foldr,foldr1  but will give a list of all intermediate values        |
-|                      | intersperse '.' xs         | put a '.' in between every element of the list xs                                      |
-|                      | concat xs                  | flatten list of lists                                                                  |
-|                      | intercalate xs ts          | put list xs in between all lists of ts and flatten the result                          |
-|                      | transpose xs               | switch columns and rows of the 2D matrix xs                                            |
-|                      | and                        | = &&                                                                                   |
-|                      | or                         |                                                                                        |
-|                      | union                      |                                                                                        |
-|                      | intersect                  |                                                                                        |
-|                      | any f xs                   | return True if any element of xs satifies f                                            |
-|                      | all f xs                   | return True if all alements of xs satify f                                             |
-|                      | iterate f x                | return infinite list [f(x), f(f(x)), ...]                                              |
-|                      | splitAt x xs               | split list xs into tuple at index x                                                    |
-|                      | sort xs                    | sort list xs                                                                           |
-|                      | group xs                   | group following, equal list items                                                      |
-|                      | isInfixOf xs ts            | return if xs is in ts                                                                  |
-|                      | isPrefixOf xs ts           | return if xs is in the beginning of ts                                                 |
-|                      | isSuffixOf xs ts           | return if xs is at the end of ts                                                       |
-|                      | partition f xs             | return pair of lists that match f, don't match f                                       |
-|                      | find f xs                  | returns the first element of xs that satisfies f                                       |
-|                      | findIndex f xs             | returns the index of the first element of xs that satisfies f                          |
-|                      | findIndeces f xs           | returns a list of indeces of xs that satisfy f                                         |
-|                      | elem x xs                  | returns wether x is an element in xs                                                   |
-|                      | elemIndex x xs             | returns the index of x, if x is an element in xs                                       |
-|                      | elemIndeces x xs           | returns a list of indeces of all elements x in xs                                      |
-|                      | zip xs                     | zip together two lists in a touple (also zip3, zip4, ... zip7)                         |
-|                      | zipWith f xs               | zip together two lists using f also (zipWith3, ... zipWith7)                           |
-|                      | lines xs                   | return list of all xs seperated by lines                                               |
-|                      | unlines xs                 | reverse lines                                                                          |
-|                      | words xs                   | same as lines but split at ' '                                                         |
-|                      | unwords xs                 | reverse words                                                                          |
-|                      | nub xs                     | remove duplicates from xs                                                              |
-|                      | delete x xs                | delete the first case of x in xs                                                       |
-|                      | xs \\ ts                   | calls delete for every in element in ts on xs                                          |
-|                      | insert x xs                | insert x in xs at the left of the first bigger element (from left)                     |
-|                      | xs !! i                    | get the element at index i of the list xs                                              |
-|                      | genericIndex               | more generic !!                                                                        |
-|                      | genericLength xs           | returns Num instead of Int (length xs)                                                 |
-|                      | nubBy f xs                 | same as nub but usees f for comparison                                                 |
-|                      | on f g                     | = \x y -> f(g x) (g y)                                                                 |
-| Data.Char            |                            |                                                                                        |
-|                      | isControl x                | x is a control character                                                               |
-|                      | isSpace, ...               | x is a ... character                                                                   |
-|                      | generalCategory x          | get the general Category of char x                                                     |
-|                      | toLower x                  | convert character x to lower case                                                      |
-|                      | digitToInt x               | turn character x into an Integer (0-F)                                                 |
-| Data.Map             |                            |                                                                                        |
-|                      | fromList [(x, y), ...]     | returns Map Object from input                                                          |
-|                      | singleton x y              | fromList [(x, y)]                                                                      |
-|                      | insert x y m               | insert (x, y) into Map m                                                               |
-|                      | null m                     | check if m is empty                                                                    |
-|                      | size m                     | get m size                                                                             |
-|                      | member x m                 | check if x is a member of m                                                            |
-|                      | map, filter                | like normal map and filter                                                             |
-|                      | fromListWith f xs          | like fromList but function f decides what to do with duplicate keys                    |
-|                      | lookup x m                 | lookup value of key x in Map m                                                         |
-| Data.Set             |                            | no duplicates                                                                          |
-|                      | fromList xs                | like Data.Map.fromList                                                                 |
-|                      | intersection s1 s2         |                                                                                        |
-|                      | difference s1 s2           |                                                                                        |
-|                      | union s1 s2                |                                                                                        |
-|                      | ...                        | many of the same functions as in Data.Map                                              |
-| Control.Monad        |                            |                                                                                        |
-|                      | when cond $ f              |                                                                                        |
-|                      | forever f                  | calls f forever                                                                        |
-|                      | forM xs f                  | like mapM with switched arguments                                                      |
-| System.IO            |                            |                                                                                        |
-|                      | openFile file mode         | returns IO Handle to file using mode (ReadMode, WriteMode, AppendMode, ReadWriteMode)  |
-|                      | hGetContents handle        | like getContents but uses IO Handle instead of stdin                                   |
-|                      | hClose handle              | returns IO action that closes the file                                                 |
-|                      | withFile file mode f       | like openFile, sends its Handle to f (which has to return an IO action), closes Handle |
-|                      | hGetLine                   |                                                                                        |
-|                      | hPutStrLn                  |                                                                                        |
-|                      | ...                        |                                                                                        |
-|                      | readFile file              | reads file, returns IO String                                                          |
-|                      | writeFile file str         | writes str to file                                                                     |
-|                      | appendFile file str        |                                                                                        |
-|                      | hSetBuffering handle mode  | change buffer method/size                                                              |
-|                      | hFlush handle              | flushes Handle                                                                         |
-|                      | openTempFile dir file_name | create temp file file_name... in dir, returns (FilePath, IO Handle)                    |
-| System.IO.Error      |                            |                                                                                        |
-|                      | catch IOf f                | if IOf throws an IOError, the Handler f then decides what to do                        |
-|                      | ioeGetFileName e           | takes IOError and returns Maybe FilePath                                               |
-| System.Directory     |                            |                                                                                        |
-|                      | removeFile file            |                                                                                        |
-|                      | renameFile file to         |                                                                                        |
-| System.Environment   |                            |                                                                                        |
-|                      | getArgs                    | get input arguments as [String]                                                        |
-|                      | getProgName                | get program name                                                                       |
-| System.Random        |                            |                                                                                        |
-|                      | random gen                 | takes a RandomGen and returns (Random, RandomGen)                                      |
-|                      | randoms gen                | takes gen and returns infinite sequence of values                                      |
-|                      | randomR (l,u) gen          | same as random but takes (lower,upper) bounds                                          |
-|                      | getSdtGen                  | returns RandomGen as IO action from OS                                                 |
-| Data.Bytestring      |                            | no lazynes, no promisses(thunks), just a string of bytes                               |
-|                      | pack xs                    | pack values into Bytestring                                                            |
-|                      | unpack b                   | unpack bytestring b                                                                    |
-|                      | fromChunks b               | take Bytestring and convert it into a lazy Bytestring                                  |
-|                      | cons x b                   | x:b, will create a new chunk everytime                                                 |
-|                      | cons' x b                  | x:b, will not create a new chunk everytime                                             |
-|                      | head, tail, map, ...       |                                                                                        |
-|                      | readFile file              | same as System.IO but will return IO Bytestring                                        |
-| Data.Bytestring.Lazy | same as Data.Bytestring    | storage in chunks of 64K                                                               |
-|                      | toChunks b                 | turn lazy Bytestring into Bytestring                                                   |
+| module               | function                   | explanation                                                                              |
+|----------------------+----------------------------+------------------------------------------------------------------------------------------|
+|                      | fmap f xs                  | generic map                                                                              |
+|                      | putStrLn                   | takes String and a new line and returns an IO action                                     |
+|                      | putStr                     | takes String (without a new line) an IO action                                           |
+|                      | putChar                    |                                                                                          |
+|                      | print                      | call putStrLn with the stringified variable                                              |
+|                      | getLine                    | returns IO action from IO                                                                |
+|                      | getChar                    |                                                                                          |
+|                      | sequence xs                | calls all functions in list xs                                                           |
+|                      | mapM f xs                  | map function f to every element in list xs and returns IO action                         |
+|                      | mapM_ f xs                 | same as mapM but throws away the result                                                  |
+|                      | getContents                | read from stdin until EOF                                                                |
+|                      | interact f                 | stdin into f into stdout                                                                 |
+| Data.List            |                            |                                                                                          |
+|                      | head xs                    | give first element of list xs                                                            |
+|                      | length xs                  | get length of a list                                                                     |
+|                      | takeWhile f xs             | take elements of xs into a new list as long as f is true (takeWhile (<1000) [1..])       |
+|                      | dropWhile f xs             | take elements of xs into a new list starting when f is true                              |
+|                      | span f xs                  | returns pair of lists that would have been returned b takeWhile, dropWhile               |
+|                      | break f xs                 | same as span (not . f) xs                                                                |
+|                      | sum xs                     | get sum of list xs                                                                       |
+|                      | map f xs                   | map function f to every element in list xs                                               |
+|                      | flip x y                   | flip input values to y x                                                                 |
+|                      | foldl f 0 xs               | apply function f over list (from the left) xs with the starting value 0                  |
+|                      | foldl1 f xs                | apply function f over list (from the left) xs with the starting value of x:xs            |
+|                      | foldr f 0 xs               | apply function f over list (from the right) xs with the starting value 0                 |
+|                      | foldr1 f xs                | apply function f over list (from the right) xs with the starting value of xs:x           |
+|                      | scanl,scanl1,scanr,scanr1  | like foldl,foldl1,foldr,foldr1  but will give a list of all intermediate values          |
+|                      | intersperse '.' xs         | put a '.' in between every element of the list xs                                        |
+|                      | concat xs                  | flatten list of lists                                                                    |
+|                      | intercalate xs ts          | put list xs in between all lists of ts and flatten the result                            |
+|                      | transpose xs               | switch columns and rows of the 2D matrix xs                                              |
+|                      | and                        | = &&                                                                                     |
+|                      | or                         |                                                                                          |
+|                      | union                      |                                                                                          |
+|                      | intersect                  |                                                                                          |
+|                      | any f xs                   | return True if any element of xs satifies f                                              |
+|                      | all f xs                   | return True if all alements of xs satify f                                               |
+|                      | iterate f x                | return infinite list [f(x), f(f(x)), ...]                                                |
+|                      | splitAt x xs               | split list xs into tuple at index x                                                      |
+|                      | sort xs                    | sort list xs                                                                             |
+|                      | group xs                   | group following, equal list items                                                        |
+|                      | isInfixOf xs ts            | return if xs is in ts                                                                    |
+|                      | isPrefixOf xs ts           | return if xs is in the beginning of ts                                                   |
+|                      | isSuffixOf xs ts           | return if xs is at the end of ts                                                         |
+|                      | partition f xs             | return pair of lists that match f, don't match f                                         |
+|                      | find f xs                  | returns the first element of xs that satisfies f                                         |
+|                      | findIndex f xs             | returns the index of the first element of xs that satisfies f                            |
+|                      | findIndeces f xs           | returns a list of indeces of xs that satisfy f                                           |
+|                      | elem x xs                  | returns wether x is an element in xs                                                     |
+|                      | elemIndex x xs             | returns the index of x, if x is an element in xs                                         |
+|                      | elemIndeces x xs           | returns a list of indeces of all elements x in xs                                        |
+|                      | zip xs                     | zip together two lists in a touple (also zip3, zip4, ... zip7)                           |
+|                      | zipWith f xs               | zip together two lists using f also (zipWith3, ... zipWith7)                             |
+|                      | lines xs                   | return list of all xs seperated by lines                                                 |
+|                      | unlines xs                 | reverse lines                                                                            |
+|                      | words xs                   | same as lines but split at ' '                                                           |
+|                      | unwords xs                 | reverse words                                                                            |
+|                      | nub xs                     | remove duplicates from xs                                                                |
+|                      | delete x xs                | delete the first case of x in xs                                                         |
+|                      | xs \\ ts                   | calls delete for every in element in ts on xs                                            |
+|                      | insert x xs                | insert x in xs at the left of the first bigger element (from left)                       |
+|                      | xs !! i                    | get the element at index i of the list xs                                                |
+|                      | genericIndex               | more generic !!                                                                          |
+|                      | genericLength xs           | returns Num instead of Int (length xs)                                                   |
+|                      | nubBy f xs                 | same as nub but usees f for comparison                                                   |
+|                      | on f g                     | = \x y -> f(g x) (g y)                                                                   |
+| Data.Char            |                            |                                                                                          |
+|                      | isControl x                | x is a control character                                                                 |
+|                      | isSpace, ...               | x is a ... character                                                                     |
+|                      | generalCategory x          | get the general Category of char x                                                       |
+|                      | toLower x                  | convert character x to lower case                                                        |
+|                      | digitToInt x               | turn character x into an Integer (0-F)                                                   |
+| Data.Map             |                            |                                                                                          |
+|                      | fromList [(x, y), ...]     | returns Map Object from input                                                            |
+|                      | singleton x y              | fromList [(x, y)]                                                                        |
+|                      | insert x y m               | insert (x, y) into Map m                                                                 |
+|                      | null m                     | check if m is empty                                                                      |
+|                      | size m                     | get m size                                                                               |
+|                      | member x m                 | check if x is a member of m                                                              |
+|                      | map, filter                | like normal map and filter                                                               |
+|                      | fromListWith f xs          | like fromList but function f decides what to do with duplicate keys                      |
+|                      | lookup x m                 | lookup value of key x in Map m                                                           |
+| Data.Set             |                            | no duplicates                                                                            |
+|                      | fromList xs                | like Data.Map.fromList                                                                   |
+|                      | intersection s1 s2         |                                                                                          |
+|                      | difference s1 s2           |                                                                                          |
+|                      | union s1 s2                |                                                                                          |
+|                      | ...                        | many of the same functions as in Data.Map                                                |
+| Control.Monad        |                            |                                                                                          |
+|                      | when cond $ f              |                                                                                          |
+|                      | forever f                  | calls f forever                                                                          |
+|                      | forM xs f                  | like mapM with switched arguments                                                        |
+| System.IO            |                            |                                                                                          |
+|                      | openFile file mode         | returns IO Handle to file using mode (ReadMode, WriteMode, AppendMode, ReadWriteMode)    |
+|                      | hGetContents handle        | like getContents but uses IO Handle instead of stdin                                     |
+|                      | hClose handle              | returns IO action that closes the file                                                   |
+|                      | withFile file mode f       | like openFile, sends its Handle to f (which has to return an IO action), closes Handle   |
+|                      | hGetLine                   |                                                                                          |
+|                      | hPutStrLn                  |                                                                                          |
+|                      | ...                        |                                                                                          |
+|                      | readFile file              | reads file, returns IO String                                                            |
+|                      | writeFile file str         | writes str to file                                                                       |
+|                      | appendFile file str        |                                                                                          |
+|                      | hSetBuffering handle mode  | change buffer method/size                                                                |
+|                      | hFlush handle              | flushes Handle                                                                           |
+|                      | openTempFile dir file_name | create temp file file_name... in dir, returns (FilePath, IO Handle)                      |
+| System.IO.Error      |                            |                                                                                          |
+|                      | catch IOf f                | if IOf throws an IOError, the Handler f then decides what to do                          |
+|                      | ioeGetFileName e           | takes IOError and returns Maybe FilePath                                                 |
+| System.Directory     |                            |                                                                                          |
+|                      | removeFile file            |                                                                                          |
+|                      | renameFile file to         |                                                                                          |
+| System.Environment   |                            |                                                                                          |
+|                      | getArgs                    | get input arguments as [String]                                                          |
+|                      | getProgName                | get program name                                                                         |
+| System.Random        |                            |                                                                                          |
+|                      | random gen                 | takes a RandomGen and returns (Random, RandomGen)                                        |
+|                      | randoms gen                | takes gen and returns infinite sequence of values                                        |
+|                      | randomR (l,u) gen          | same as random but takes (lower,upper) bounds                                            |
+|                      | getSdtGen                  | returns RandomGen as IO action from OS                                                   |
+| Data.Bytestring      |                            | no lazynes, no promisses(thunks), just a string of bytes                                 |
+|                      | pack xs                    | pack values into Bytestring                                                              |
+|                      | unpack b                   | unpack bytestring b                                                                      |
+|                      | fromChunks b               | take Bytestring and convert it into a lazy Bytestring                                    |
+|                      | cons x b                   | x:b, will create a new chunk everytime                                                   |
+|                      | cons' x b                  | x:b, will not create a new chunk everytime                                               |
+|                      | head, tail, map, ...       |                                                                                          |
+|                      | readFile file              | same as System.IO but will return IO Bytestring                                          |
+| Data.Bytestring.Lazy | same as Data.Bytestring    | storage in chunks of 64K                                                                 |
+|                      | toChunks b                 | turn lazy Bytestring into Bytestring                                                     |
+| Control.Applicative  |                            | adds typeclass Applicative                                                               |
+|                      | pure x                     | needed for <*>                                                                           |
+|                      | f <*> x                    | pure (+) <*> [1,2,3] <*> [100,200,300] = [101,201,301,201,202,...]                       |
+|                      | f <$> xs                   | fmap f xs                                                                                |
+|                      | ZipList xs                 | (+) <$> ZipList [1,2,3] <*> ZipList [100,200,300] = [101, 202, 303]                      |
+|                      | getZipList xs              | show ZipList                                                                             |
+|                      | liftA2 f x t               | like <*> with extra argument                                                             |
+| Data.Monoid          |                            | adds typeclass Monoid                                                                    |
+|                      | mappend x y                | takes two monoids and returns a third (*, ++, -, ...)                                    |
+|                      | mempty                     | represents identity value for a monoid (1, [], 0, ...)                                   |
+|                      | mconcat xs                 | takes a list of monoids and applies mappend between all elements                         |
+| Data.Foldable        |                            |                                                                                          |
+|                      | foldMap f x                | map function f (that returns monoid) over foldable structure x and returns single monoid |
+|                      | foldr ...                  | like normal foldr but takes Foldable instead of a list (free when implementing foldMap)  |
+
 * Resources
 https://hoogle.haskell.org/
 http://learnyouahaskell.com
